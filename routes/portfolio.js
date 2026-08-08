@@ -42,7 +42,7 @@ router.post("/", requireAuth, upload.single("image"), handleUploadError, async (
     if (url && !isValidUrl(url)) {
       return res.status(400).json({ success: false, message: "Invalid URL" });
     }
-    const imageUrl = req.file ? `/uploads/${req.user.username}/${req.file.filename}` : "";
+    const imageUrl = req.file ? req.file.path : "";
     const item = await Portfolio.create({
       user: req.user._id,
       imageUrl,
@@ -59,7 +59,7 @@ router.post("/", requireAuth, upload.single("image"), handleUploadError, async (
 // PUT /api/portfolio/reorder (must be defined before /:id)
 router.put("/reorder", requireAuth, async (req, res) => {
   try {
-    const { order } = req.body; // array of item ids in new order
+    const { order } = req.body;
     if (!Array.isArray(order)) {
       return res.status(400).json({ success: false, message: "order must be an array of ids" });
     }
@@ -89,7 +89,7 @@ router.put("/:id", requireAuth, upload.single("image"), handleUploadError, async
     }
     if (caption !== undefined) item.caption = sanitizeText(caption, 200);
     if (active !== undefined) item.active = active === "true" || active === true;
-    if (req.file) item.imageUrl = `/uploads/${req.user.username}/${req.file.filename}`;
+    if (req.file) item.imageUrl = req.file.path;
 
     await item.save();
     res.json({ success: true, item });

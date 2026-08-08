@@ -88,7 +88,7 @@ router.post("/avatar", requireAuth, upload.single("avatar"), handleUploadError, 
     if (!req.file) {
       return res.status(400).json({ success: false, message: "No file uploaded" });
     }
-    req.user.avatarUrl = `/uploads/${req.user.username}/${req.file.filename}`;
+    req.user.avatarUrl = req.file.path;
     await req.user.save();
     res.json({ success: true, avatarUrl: req.user.avatarUrl });
   } catch (err) {

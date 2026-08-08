@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - Dot</title>
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+  <div class="error-page">
+    <div class="brand" style="justify-content:center;margin-bottom:32px;">
+      <img src="/images/logo.svg" alt="Dot">
+      Dot Admin
+    </div>
+
+    <div class="narrow" style="width:100%;max-width:420px;">
+      <div class="alert" id="loginError"></div>
+      <form id="adminLoginForm">
+        <div class="field">
+          <label for="identifier">Username or Email</label>
+          <input type="text" id="identifier" name="identifier" placeholder="admin" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+      </form>
+      <p style="text-align:center;margin-top:24px;font-size:13px;color:var(--medium-gray);">
+        <a href="/" style="color:var(--hover-blue);font-weight:600;">← Back to site</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

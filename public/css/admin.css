@@ -1,0 +1,155 @@
+/* =========================================
+   Dot Admin — Admin-only Styles
+   ========================================= */
+
+/* Sidebar full-height with bottom buttons pinned */
+.dash-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.dash-sidebar .brand {
+  flex-shrink: 0;
+}
+
+.dash-sidebar .dash-nav {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.dash-sidebar .sidebar-footer {
+  flex-shrink: 0;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-gray);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Chart row */
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border-gray);
+  border: 1px solid var(--border-gray);
+  margin-top: 32px;
+}
+
+.chart-box {
+  background: var(--white);
+  padding: 24px;
+}
+
+.chart-box .section-title {
+  margin-bottom: 8px;
+}
+
+.chart-box canvas {
+  margin-top: 12px;
+}
+
+/* Empty chart state */
+.chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--light-gray);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Action buttons in table */
+.btn-xs {
+  padding: 4px 10px;
+  font-size: 11px;
+}
+
+/* Stat card in cleanup section */
+.cleanup-stat {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  border: 1px solid var(--border-gray);
+  margin-bottom: 24px;
+}
+
+.cleanup-stat .stat-number {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.cleanup-stat .stat-info {
+  font-size: 14px;
+  color: var(--medium-gray);
+}
+
+/* Section spacing */
+.dash-section > .section-title {
+  margin-bottom: 20px;
+}
+
+.dash-section > .section-desc {
+  margin-bottom: 24px;
+}
+
+/* Empty state for tables */
+.table-empty {
+  text-align: center;
+  color: var(--light-gray);
+  padding: 32px 16px !important;
+}
+
+/* Logs table specific */
+#logsTableBody td {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+  .dash-sidebar {
+    height: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .dash-sidebar .sidebar-footer {
+    flex-direction: row;
+    padding: 12px 16px;
+    gap: 8px;
+  }
+
+  .dash-sidebar .sidebar-footer .btn {
+    flex: 1;
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .chart-row {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-box {
+    padding: 16px;
+  }
+
+  .cleanup-stat {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 20px;
+  }
+
+  .cleanup-stat .stat-number {
+    font-size: 36px;
+  }
+}

@@ -1,0 +1,131 @@
+DOT — USAGE GUIDE
+==================
+
+1. FIRST-TIME SETUP
+--------------------
+  npm install
+  # make sure MongoDB is running and MONGODB_URI in .env points to it
+  npm run seed
+  npm start
+
+  Open http://localhost:3000
+
+
+2. CREATING AN ACCOUNT (as a regular user)
+-------------------------------------------
+  - Click "Sign up" on the landing page.
+  - Choose a username (lowercase letters, numbers, underscores only).
+    This CANNOT be changed later, so choose carefully.
+  - Enter an email and password (6+ characters).
+  - You're dropped straight into the dashboard.
+
+
+3. USING THE DASHBOARD
+------------------------
+  Overview
+    - See your active link count and portfolio item count.
+    - Copy your public page URL (yoursite.com/your-username).
+    - Preview your live public page in a new tab.
+
+  Links
+    - Click "+ Add link" to add a title, URL, and optional emoji icon.
+    - Drag the ⠿ handle to reorder links — order is saved automatically.
+    - Toggle the switch on each link to show/hide it on your public page
+      without deleting it.
+    - Edit or delete any link at any time.
+
+  Portfolio
+    - Click "+ Add item" to upload an image (JPG/PNG/WebP/GIF, max 2MB).
+    - Caption and link URL are both optional — you can post an image
+      alone, or a captioned image, or an image that links out.
+    - Maximum of 6 portfolio items. The "+ Add item" button disables
+      itself once you hit the limit.
+    - Drag to reorder, just like links.
+
+  Profile
+    - Upload an avatar (max 2MB).
+    - Set your display name, bio (160 char max), and location.
+
+  Social
+    - Add URLs for Twitter/X, GitHub, LinkedIn, YouTube, Instagram.
+    - Any left blank simply won't show an icon on your public page.
+
+  Account
+    - Change your password (requires current password).
+    - Log out from the top-right of the dashboard.
+
+
+4. YOUR PUBLIC PAGE
+---------------------
+  Lives at:  yoursite.com/your-username
+
+  Shows (in order): avatar, display name, bio, location, social icons,
+  portfolio grid, then your active links, then the site footer.
+
+  Anything you haven't filled in (bio, location, social links, avatar)
+  is simply skipped — nothing shows blank placeholders.
+
+
+5. ADMIN PANEL (API-only in this build)
+------------------------------------------
+  Default admin login (change immediately after first use):
+    Username: admin
+    Password: admin123
+
+  All admin endpoints require a Bearer token from POST /api/admin/login.
+  Example with curl:
+
+    # Log in as admin
+    curl -X POST http://localhost:3000/api/admin/login \
+      -H "Content-Type: application/json" \
+      -d '{"identifier":"admin","password":"admin123"}'
+
+    # Use the returned token for subsequent calls
+    curl http://localhost:3000/api/admin/stats \
+      -H "Authorization: Bearer YOUR_TOKEN_HERE"
+
+  Available admin endpoints:
+    GET    /api/admin/stats                 system-wide stats
+    GET    /api/admin/users                 paginated user list
+    GET    /api/admin/users/search?q=...     search by username/email
+    GET    /api/admin/users/export           download users as CSV
+    PUT    /api/admin/users/:id/activate     activate/deactivate a user
+    DELETE /api/admin/users/:id              delete a user (and their data)
+    POST   /api/admin/cleanup                purge accounts inactive
+                                              30+ days
+    GET    /api/admin/logs                   recent signups/logins
+    PUT    /api/admin/profile                update admin display name/email
+    PUT    /api/admin/password               change admin password
+
+  To change the admin password from the CLI-free path, log in as admin
+  in the regular dashboard UI (the admin account is a normal user account
+  with isAdmin: true) and use the Account tab — it hits the same
+  PUT /api/user/password style flow via the admin-specific endpoint if
+  you wire up an admin UI, or via curl as shown above.
+
+
+6. RESETTING A FORGOTTEN PASSWORD
+------------------------------------
+  There's no email-based reset flow in this build. To reset a password
+  directly in MongoDB:
+
+    1. Generate a bcrypt hash for the new password (Node REPL):
+         node -e "console.log(require('bcryptjs').hashSync('newpassword123', 10))"
+    2. Update the user's password field in MongoDB with that hash.
+
+
+7. TROUBLESHOOTING
+---------------------
+  "MongoDB connection error" on startup
+    -> Check MONGODB_URI in .env and confirm MongoDB is running/reachable.
+
+  Images not uploading
+    -> Confirm file is under 2MB and is JPG/PNG/WebP (or GIF for
+       portfolio items specifically).
+
+  "Maximum of 6 portfolio items allowed"
+    -> Delete an existing item before adding a new one.
+
+  Public page shows 404
+    -> Double check the username spelling and that the account is
+       active (admins can reactivate deactivated accounts).

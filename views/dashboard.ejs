@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="dash-wrap" id="dashWrap">
+    <aside class="dash-sidebar">
+      <div class="brand">
+        <img src="/images/logo.svg" alt="Dot">
+        Dot
+      </div>
+      <nav class="dash-nav">
+        <a href="#" data-section="section-overview" class="active">Overview</a>
+        <a href="#" data-section="section-links">Links</a>
+        <a href="#" data-section="section-portfolio">Portfolio</a>
+        <a href="#" data-section="section-profile">Profile</a>
+        <a href="#" data-section="section-social">Social</a>
+        <a href="#" data-section="section-account">Account</a>
+      </nav>
+    </aside>
+
+    <main class="dash-main">
+      <div class="dash-header">
+        <h1 id="dashUsername">@user</h1>
+        <div class="flex gap-8">
+          <button class="btn btn-sm" id="previewBtn">Preview page</button>
+          <button class="btn btn-sm btn-ghost" id="logoutBtn">Log out</button>
+        </div>
+      </div>
+
+      <!-- Overview -->
+      <section class="dash-section active" id="section-overview">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="value" id="statLinks">0</div>
+            <div class="label">Active links</div>
+          </div>
+          <div class="stat-card">
+            <div class="value" id="statPortfolio">0</div>
+            <div class="label">Portfolio items</div>
+          </div>
+        </div>
+
+        <div class="section-title">Your public page</div>
+        <div class="copy-row">
+          <input type="text" id="publicUrlInput" readonly>
+          <button class="btn btn-sm" id="copyUrlBtn">Copy</button>
+        </div>
+      </section>
+
+      <!-- Links -->
+      <section class="dash-section" id="section-links">
+        <div class="dash-header">
+          <div class="section-title" style="margin-bottom:0;">Links</div>
+          <button class="btn btn-primary btn-sm" id="addLinkBtn">+ Add link</button>
+        </div>
+        <div id="linksList"></div>
+      </section>
+
+      <!-- Portfolio -->
+      <section class="dash-section" id="section-portfolio">
+        <div class="dash-header">
+          <div class="section-title" style="margin-bottom:0;">Portfolio <span class="text-muted text-sm" id="portfolioCounter"></span></div>
+          <button class="btn btn-primary btn-sm" id="addPortfolioBtn">+ Add item</button>
+        </div>
+        <div id="portfolioList"></div>
+      </section>
+
+      <!-- Profile -->
+      <section class="dash-section" id="section-profile">
+        <div class="section-title">Profile</div>
+        <div class="section-desc">This is what visitors see at the top of your page.</div>
+
+        <div class="avatar-upload">
+          <div class="avatar-preview" id="avatarPreview">?</div>
+          <div>
+            <label class="btn btn-sm" style="cursor:pointer;">
+              Upload avatar
+              <input type="file" id="avatarInput" accept="image/jpeg,image/png,image/webp" style="display:none;">
+            </label>
+            <div class="field-hint">JPG, PNG, or WebP. Max 2MB.</div>
+          </div>
+        </div>
+
+        <div class="alert" id="profileAlert"></div>
+        <form id="profileForm">
+          <div class="field">
+            <label for="profileDisplayName">Display name</label>
+            <input type="text" id="profileDisplayName" maxlength="60">
+          </div>
+          <div class="field">
+            <label for="profileBio">Bio</label>
+            <textarea id="profileBio" maxlength="160"></textarea>
+            <small>Max 160 characters.</small>
+          </div>
+          <div class="field">
+            <label for="profileLocation">Location</label>
+            <input type="text" id="profileLocation" maxlength="80">
+          </div>
+          <button type="submit" class="btn btn-primary">Save profile</button>
+        </form>
+      </section>
+
+      <!-- Social -->
+      <section class="dash-section" id="section-social">
+        <div class="section-title">Social links</div>
+        <div class="section-desc">Only filled-in links will show on your public page.</div>
+        <div class="alert" id="socialAlert"></div>
+        <form id="socialForm">
+          <div class="field">
+            <label for="socialTwitter">Twitter / X</label>
+            <input type="url" id="socialTwitter" placeholder="https://twitter.com/username">
+          </div>
+          <div class="field">
+            <label for="socialGithub">GitHub</label>
+            <input type="url" id="socialGithub" placeholder="https://github.com/username">
+          </div>
+          <div class="field">
+            <label for="socialLinkedin">LinkedIn</label>
+            <input type="url" id="socialLinkedin" placeholder="https://linkedin.com/in/username">
+          </div>
+          <div class="field">
+            <label for="socialYoutube">YouTube</label>
+            <input type="url" id="socialYoutube" placeholder="https://youtube.com/@username">
+          </div>
+          <div class="field">
+            <label for="socialInstagram">Instagram</label>
+            <input type="url" id="socialInstagram" placeholder="https://instagram.com/username">
+          </div>
+          <button type="submit" class="btn btn-primary">Save social links</button>
+        </form>
+      </section>
+
+      <!-- Account -->
+      <section class="dash-section" id="section-account">
+        <div class="section-title">Change password</div>
+        <div class="alert" id="passwordAlert"></div>
+        <form id="passwordForm">
+          <div class="field">
+            <label for="currentPassword">Current password</label>
+            <input type="password" id="currentPassword" required autocomplete="current-password">
+          </div>
+          <div class="field">
+            <label for="newPassword">New password</label>
+            <input type="password" id="newPassword" required minlength="6" autocomplete="new-password">
+          </div>
+          <button type="submit" class="btn btn-primary">Update password</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <!-- Link form modal -->
+  <div class="modal-overlay" id="linkFormModal">
+    <div class="modal">
+      <button class="modal-close" data-close-modal>&times;</button>
+      <h2 id="linkFormTitle">Add link</h2>
+      <form id="linkForm">
+        <input type="hidden" id="linkFormId">
+        <div class="field">
+          <label for="linkFormTitleInput">Title</label>
+          <input type="text" id="linkFormTitleInput" required maxlength="80">
+        </div>
+        <div class="field">
+          <label for="linkFormUrl">URL</label>
+          <input type="url" id="linkFormUrl" required placeholder="https://example.com">
+        </div>
+        <div class="field">
+          <label for="linkFormIcon">Icon (emoji, optional)</label>
+          <input type="text" id="linkFormIcon" maxlength="10" placeholder="🔗">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save link</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Portfolio form modal -->
+  <div class="modal-overlay" id="portfolioFormModal">
+    <div class="modal">
+      <button class="modal-close" data-close-modal>&times;</button>
+      <h2 id="portfolioFormTitle">Add portfolio item</h2>
+      <form id="portfolioForm">
+        <input type="hidden" id="portfolioFormId">
+        <div class="field">
+          <label for="portfolioFormImage">Image</label>
+          <input type="file" id="portfolioFormImage" accept="image/jpeg,image/png,image/webp,image/gif">
+          <small>JPG, PNG, WebP, or GIF. Max 2MB. Optional.</small>
+        </div>
+        <div class="field">
+          <label for="portfolioFormCaption">Caption</label>
+          <input type="text" id="portfolioFormCaption" maxlength="200" placeholder="Optional">
+        </div>
+        <div class="field">
+          <label for="portfolioFormUrl">Link URL</label>
+          <input type="url" id="portfolioFormUrl" placeholder="Optional">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save item</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

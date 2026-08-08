@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Dot</title>
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <div class="dash-wrap" id="adminWrap">
+    <!-- Sidebar -->
+    <aside class="dash-sidebar">
+      <div class="brand">
+        <img src="/images/logo.svg" alt="Dot">
+        Admin
+      </div>
+      <nav class="dash-nav">
+        <a href="#" data-section="section-overview" class="active">Overview</a>
+        <a href="#" data-section="section-users">Users</a>
+        <a href="#" data-section="section-profile">My Profile</a>
+        <a href="#" data-section="section-logs">Logs</a>
+        <a href="#" data-section="section-cleanup">Cleanup</a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="/" class="btn btn-sm btn-ghost btn-block">← Back to site</a>
+        <button class="btn btn-sm btn-ghost btn-block" id="adminLogoutBtn">Log out</button>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="dash-main">
+      <div class="dash-header">
+        <h1 id="adminSectionTitle">Overview</h1>
+        <span class="text-muted text-sm" id="adminGreeting"></span>
+      </div>
+
+      <!-- ============ OVERVIEW ============ -->
+      <section class="dash-section active" id="section-overview">
+        <div class="stats-grid" id="adminStatsGrid">
+          <div class="stat-card">
+            <div class="value" id="statTotalUsers">—</div>
+            <div class="label">Total users</div>
+          </div>
+          <div class="stat-card">
+            <div class="value" id="statActiveUsers">—</div>
+            <div class="label">Active</div>
+          </div>
+          <div class="stat-card">
+            <div class="value" id="statInactiveUsers">—</div>
+            <div class="label">Inactive</div>
+          </div>
+          <div class="stat-card">
+            <div class="value" id="statAdminUsers">—</div>
+            <div class="label">Admins</div>
+          </div>
+        </div>
+
+        <div class="chart-row">
+          <div class="chart-box">
+            <div class="section-title">User Registrations (Last 7 Days)</div>
+            <canvas id="chartRegistrations" height="220"></canvas>
+            <div class="chart-empty" id="chartRegEmpty">No registration data yet.</div>
+          </div>
+          <div class="chart-box">
+            <div class="section-title">User Breakdown</div>
+            <canvas id="chartBreakdown" height="220"></canvas>
+            <div class="chart-empty" id="chartBreakEmpty">No user data available.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ USERS ============ -->
+      <section class="dash-section" id="section-users">
+        <div class="section-title">All Users</div>
+        <div class="search-row">
+          <input type="text" id="userSearchInput" placeholder="Search users by username or email...">
+          <button class="btn btn-sm" id="userSearchBtn">Search</button>
+          <button class="btn btn-sm btn-ghost" id="userExportBtn">Export CSV</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Joined</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody">
+              <tr><td colspan="6" class="table-empty">Loading users...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="flex-between mt-16">
+          <span class="text-sm text-muted" id="usersPaginationInfo"></span>
+          <div class="flex gap-8">
+            <button class="btn btn-sm btn-ghost" id="usersPrevBtn" disabled>← Prev</button>
+            <button class="btn btn-sm btn-ghost" id="usersNextBtn" disabled>Next →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MY PROFILE ============ -->
+      <section class="dash-section" id="section-profile">
+        <div class="section-title">Admin Profile</div>
+        <div class="section-desc">Update your email address or change your password.</div>
+        <div class="alert" id="adminProfileAlert"></div>
+        <form id="adminProfileForm">
+          <div class="field">
+            <label for="adminUsername">Username</label>
+            <input type="text" id="adminUsername" readonly disabled>
+            <small>Username cannot be changed.</small>
+          </div>
+          <div class="field">
+            <label for="adminEmail">Email</label>
+            <input type="email" id="adminEmail" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
+
+        <div class="divider"></div>
+
+        <div class="section-title">Change Password</div>
+        <div class="alert" id="adminPasswordAlert"></div>
+        <form id="adminPasswordForm">
+          <div class="field">
+            <label for="adminCurrentPassword">Current password</label>
+            <input type="password" id="adminCurrentPassword" required autocomplete="current-password">
+          </div>
+          <div class="field">
+            <label for="adminNewPassword">New password</label>
+            <input type="password" id="adminNewPassword" required minlength="6" autocomplete="new-password">
+          </div>
+          <button type="submit" class="btn btn-primary">Update Password</button>
+        </form>
+      </section>
+
+      <!-- ============ LOGS ============ -->
+      <section class="dash-section" id="section-logs">
+        <div class="section-title">Recent Activity Logs</div>
+        <div class="section-desc">A record of admin actions and system events.</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Action</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="logsTableBody">
+              <tr><td colspan="3" class="table-empty">No logs recorded yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ CLEANUP ============ -->
+      <section class="dash-section" id="section-cleanup">
+        <div class="section-title">Data Cleanup</div>
+        <div class="section-desc">Remove inactive accounts that haven't signed in for 90+ days. This action cannot be undone.</div>
+        <div class="alert" id="cleanupAlert"></div>
+        <div class="cleanup-stat">
+          <div class="stat-number" id="statInactiveCount">—</div>
+          <div class="stat-info">Inactive accounts found</div>
+        </div>
+        <button class="btn btn-danger" id="cleanupBtn">Delete All Inactive Accounts</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

@@ -104,4 +104,4 @@ There's no separate `/admin` view in this build — the admin routes are pure JS
 
 ---
 
-Footer branding (ᗰᗩOᑌ → https://maou.name.ng) appears on both the landing page and every public profile page.
+ᗰᗩOᑌ → https://maou.name.ng

@@ -223,9 +223,19 @@ if (document.getElementById('adminWrap')) {
   });
 
   // ─── Overview ───────────────────────────
+  function cssVar(name) {
+    var val = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return val || '#000000';
+  }
+
   async function loadOverview() {
     try {
       var data = await apiFetch('/api/admin/stats');
+      var fg = cssVar('--fg');
+      var fg2 = cssVar('--fg-2');
+      var fg3 = cssVar('--fg-3');
+      var bg = cssVar('--bg');
+      var line = cssVar('--line');
 
       document.getElementById('statTotalUsers').textContent = data.totalUsers != null ? data.totalUsers : '—';
       document.getElementById('statActiveUsers').textContent = data.activeUsers != null ? data.activeUsers : '—';
@@ -251,15 +261,18 @@ if (document.getElementById('adminWrap')) {
               datasets: [{
                 label: 'New Users',
                 data: days.map(function(d) { return d.count || 0; }),
-                backgroundColor: '#000000',
-                borderColor: '#000000',
+                backgroundColor: fg,
+                borderColor: fg,
                 borderWidth: 1
               }]
             },
             options: {
               responsive: true,
               plugins: { legend: { display: false } },
-              scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+              scales: {
+                y: { beginAtZero: true, ticks: { stepSize: 1, color: fg2 }, grid: { color: line } },
+                x: { ticks: { color: fg2 }, grid: { display: false } }
+              }
             }
           });
         }
@@ -283,14 +296,14 @@ if (document.getElementById('adminWrap')) {
               labels: ['Active', 'Inactive', 'Admins'],
               datasets: [{
                 data: [data.activeUsers || 0, data.inactiveUsers || 0, data.adminUsers || 0],
-                backgroundColor: ['#000000', '#999999', '#555555'],
-                borderColor: '#ffffff',
+                backgroundColor: [fg, fg2, fg3],
+                borderColor: bg,
                 borderWidth: 2
               }]
             },
             options: {
               responsive: true,
-              plugins: { legend: { position: 'bottom' } }
+              plugins: { legend: { position: 'bottom', labels: { color: fg2 } } }
             }
           });
         }

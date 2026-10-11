@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
-  <link rel="shortcut icon" href="/images/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css">
+  <%- include('partials/head', { title: title, description: 'Manage your Dot link-in-bio page.' }) %>
 </head>
 <body>
 
   <div class="dash-wrap" id="dashWrap">
     <aside class="dash-sidebar">
-      <div class="brand">
-        <img src="/images/logo.svg" alt="Dot">
-        Dot
-      </div>
-      <nav class="dash-nav">
-        <a href="#" data-section="section-overview" class="active">Overview</a>
-        <a href="#" data-section="section-links">Links</a>
-        <a href="#" data-section="section-portfolio">Portfolio</a>
-        <a href="#" data-section="section-profile">Profile</a>
-        <a href="#" data-section="section-social">Social</a>
-        <a href="#" data-section="section-account">Account</a>
+      <a href="/" class="brand">
+        <img src="/images/logo.svg" alt="">
+        dot
+      </a>
+      <nav class="dash-nav" aria-label="Dashboard sections">
+        <a href="#" data-section="section-overview" class="active"><span class="index-num">01</span><span>Overview</span></a>
+        <a href="#" data-section="section-links"><span class="index-num">02</span><span>Links</span></a>
+        <a href="#" data-section="section-portfolio"><span class="index-num">03</span><span>Portfolio</span></a>
+        <a href="#" data-section="section-profile"><span class="index-num">04</span><span>Profile</span></a>
+        <a href="#" data-section="section-social"><span class="index-num">05</span><span>Social</span></a>
+        <a href="#" data-section="section-account"><span class="index-num">06</span><span>Account</span></a>
       </nav>
+      <div class="sidebar-footer">
+        <a href="/" class="btn btn-sm btn-ghost btn-block">Back to site</a>
+      </div>
     </aside>
 
     <main class="dash-main">
@@ -39,26 +37,27 @@
       <section class="dash-section active" id="section-overview">
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="value" id="statLinks">0</div>
+            <div class="value reg-num" id="statLinks">0</div>
             <div class="label">Active links</div>
           </div>
           <div class="stat-card">
-            <div class="value" id="statPortfolio">0</div>
+            <div class="value reg-num" id="statPortfolio">0</div>
             <div class="label">Portfolio items</div>
           </div>
         </div>
 
         <div class="section-title">Your public page</div>
+        <div class="section-desc">Share this URL anywhere — people see exactly what you curate below.</div>
         <div class="copy-row">
-          <input type="text" id="publicUrlInput" readonly>
+          <input type="text" id="publicUrlInput" readonly aria-label="Your public page URL">
           <button class="btn btn-sm" id="copyUrlBtn">Copy</button>
         </div>
       </section>
 
       <!-- Links -->
       <section class="dash-section" id="section-links">
-        <div class="dash-header">
-          <div class="section-title" style="margin-bottom:0;">Links</div>
+        <div class="dash-header" style="margin-bottom:0;">
+          <div class="section-title" style="margin:0;">Links</div>
           <button class="btn btn-primary btn-sm" id="addLinkBtn">+ Add link</button>
         </div>
         <div id="linksList"></div>
@@ -66,8 +65,8 @@
 
       <!-- Portfolio -->
       <section class="dash-section" id="section-portfolio">
-        <div class="dash-header">
-          <div class="section-title" style="margin-bottom:0;">Portfolio <span class="text-muted text-sm" id="portfolioCounter"></span></div>
+        <div class="dash-header" style="margin-bottom:0;">
+          <div class="section-title" style="margin:0;">Portfolio <span class="text-muted text-sm" id="portfolioCounter"></span></div>
           <button class="btn btn-primary btn-sm" id="addPortfolioBtn">+ Add item</button>
         </div>
         <div id="portfolioList"></div>
@@ -79,7 +78,7 @@
         <div class="section-desc">This is what visitors see at the top of your page.</div>
 
         <div class="avatar-upload">
-          <div class="avatar-preview" id="avatarPreview">?</div>
+          <div class="avatar-preview" id="avatarPreview" aria-label="Avatar preview">?</div>
           <div>
             <label class="btn btn-sm" style="cursor:pointer;">
               Upload avatar
@@ -160,7 +159,9 @@
   <!-- Link form modal -->
   <div class="modal-overlay" id="linkFormModal">
     <div class="modal">
-      <button class="modal-close" data-close-modal>&times;</button>
+      <span class="modal-index">MOD.01</span>
+      <button class="modal-close" data-close-modal>Close</button>
+      <div class="micro-label">Links</div>
       <h2 id="linkFormTitle">Add link</h2>
       <form id="linkForm">
         <input type="hidden" id="linkFormId">
@@ -184,7 +185,9 @@
   <!-- Portfolio form modal -->
   <div class="modal-overlay" id="portfolioFormModal">
     <div class="modal">
-      <button class="modal-close" data-close-modal>&times;</button>
+      <span class="modal-index">MOD.02</span>
+      <button class="modal-close" data-close-modal>Close</button>
+      <div class="micro-label">Portfolio</div>
       <h2 id="portfolioFormTitle">Add portfolio item</h2>
       <form id="portfolioForm">
         <input type="hidden" id="portfolioFormId">
@@ -206,6 +209,7 @@
     </div>
   </div>
 
+  <script src="/js/theme.js"></script>
   <script src="/js/script.js"></script>
 </body>
 </html>

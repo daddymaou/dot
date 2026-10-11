@@ -63,6 +63,19 @@ app.get("/admin", (req, res) => {
   res.render("admin/dashboard", { title: "Admin Dashboard - Dot" });
 });
 
+// Legal pages — registered before the public profile catch-all
+app.get("/terms", (req, res) => {
+  res.render("terms", { title: "Terms · Dot", description: "Terms of service for Dot." });
+});
+
+app.get("/privacy", (req, res) => {
+  res.render("privacy", { title: "Privacy · Dot", description: "Privacy policy for Dot." });
+});
+
+app.get("/cookies", (req, res) => {
+  res.render("cookies", { title: "Cookies · Dot", description: "How Dot uses cookies." });
+});
+
 // API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);

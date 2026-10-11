@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title: title, description: 'Terms of service for Dot.' }) %>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="/" class="brand" aria-label="Dot home">
+        <img src="/images/logo.svg" alt="">
+        dot
+      </a>
+      <div class="nav-actions">
+        <a href="/" class="btn btn-sm btn-ghost">&larr; Back to site</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="legal-page" data-reveal>
+    <div class="doc-meta">Dot · Terms of Service · v1.0 · 2026</div>
+    <h1>Terms of Service</h1>
+
+    <h2>1. Agreement</h2>
+    <p>By creating an account or using the Dot service you agree to these terms. If you do not agree, do not use the service.</p>
+
+    <h2>2. Accounts</h2>
+    <p>You are responsible for the usernames, content, and links you publish. You must not:</p>
+    <ul>
+      <li>Impersonate other people or organisations</li>
+      <li>Post illegal, harmful, or infringing content</li>
+      <li>Attempt to disrupt, overload, or abuse the service</li>
+      <li>Create accounts with the purpose of squatting usernames</li>
+    </ul>
+
+    <h2>3. Content &amp; ownership</h2>
+    <p>You keep ownership of everything you post. You grant Dot a limited licence to store and display that content so the service can work.</p>
+
+    <h2>4. Acceptable use</h2>
+    <p>We reserve the right to remove content or deactivate accounts that violate these terms, at our sole discretion and without prior notice.</p>
+    <p>Links you share should point to pages you have the right to share. Dot is not responsible for the content of any third-party site you link to.</p>
+
+    <h2>5. Changes</h2>
+    <p>We may update these terms from time to time. Material changes will be reflected on this page. Continued use after changes means you accept them.</p>
+  </div>
+
+  <%- include('partials/consent') %>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/reveal.js"></script>
+  <script src="/js/consent.js"></script>
+</body>
+</html>

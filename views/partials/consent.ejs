@@ -1,0 +1,13 @@
+<% if (typeof showConsent === 'undefined' || showConsent) { %>
+<div class="consent-banner" id="consentBanner" role="dialog" aria-label="Cookie consent">
+  <div class="consent-inner">
+    <p class="consent-text">
+      This site uses essential cookies to keep you signed in and remember your preferences. No trackers, no analytics.
+      <a href="/cookies">Cookie policy</a> &middot; <a href="/privacy">Privacy</a>
+    </p>
+    <div class="consent-actions">
+      <button type="button" class="btn btn-solid" data-consent-accept>Accept</button>
+    </div>
+  </div>
+</div>
+<% } %>

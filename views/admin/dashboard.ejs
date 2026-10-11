@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard - Dot</title>
-  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
-  <link rel="shortcut icon" href="/images/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/admin.css">
+  <%- include('../partials/head', { title: 'Admin Dashboard · Dot', admin: true, showConsent: false }) %>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -15,19 +9,19 @@
   <div class="dash-wrap" id="adminWrap">
     <!-- Sidebar -->
     <aside class="dash-sidebar">
-      <div class="brand">
-        <img src="/images/logo.svg" alt="Dot">
-        Admin
-      </div>
-      <nav class="dash-nav">
-        <a href="#" data-section="section-overview" class="active">Overview</a>
-        <a href="#" data-section="section-users">Users</a>
-        <a href="#" data-section="section-profile">My Profile</a>
-        <a href="#" data-section="section-logs">Logs</a>
-        <a href="#" data-section="section-cleanup">Cleanup</a>
+      <a href="/" class="brand">
+        <img src="/images/logo.svg" alt="">
+        dot / admin
+      </a>
+      <nav class="dash-nav" aria-label="Admin sections">
+        <a href="#" data-section="section-overview" class="active"><span class="index-num">01</span><span>Overview</span></a>
+        <a href="#" data-section="section-users"><span class="index-num">02</span><span>Users</span></a>
+        <a href="#" data-section="section-profile"><span class="index-num">03</span><span>My Profile</span></a>
+        <a href="#" data-section="section-logs"><span class="index-num">04</span><span>Logs</span></a>
+        <a href="#" data-section="section-cleanup"><span class="index-num">05</span><span>Cleanup</span></a>
       </nav>
       <div class="sidebar-footer">
-        <a href="/" class="btn btn-sm btn-ghost btn-block">← Back to site</a>
+        <a href="/" class="btn btn-sm btn-ghost btn-block">&larr; Back to site</a>
         <button class="btn btn-sm btn-ghost btn-block" id="adminLogoutBtn">Log out</button>
       </div>
     </aside>
@@ -43,19 +37,19 @@
       <section class="dash-section active" id="section-overview">
         <div class="stats-grid" id="adminStatsGrid">
           <div class="stat-card">
-            <div class="value" id="statTotalUsers">—</div>
+            <div class="value reg-num" id="statTotalUsers">—</div>
             <div class="label">Total users</div>
           </div>
           <div class="stat-card">
-            <div class="value" id="statActiveUsers">—</div>
+            <div class="value reg-num" id="statActiveUsers">—</div>
             <div class="label">Active</div>
           </div>
           <div class="stat-card">
-            <div class="value" id="statInactiveUsers">—</div>
+            <div class="value reg-num" id="statInactiveUsers">—</div>
             <div class="label">Inactive</div>
           </div>
           <div class="stat-card">
-            <div class="value" id="statAdminUsers">—</div>
+            <div class="value reg-num" id="statAdminUsers">—</div>
             <div class="label">Admins</div>
           </div>
         </div>
@@ -102,8 +96,8 @@
         <div class="flex-between mt-16">
           <span class="text-sm text-muted" id="usersPaginationInfo"></span>
           <div class="flex gap-8">
-            <button class="btn btn-sm btn-ghost" id="usersPrevBtn" disabled>← Prev</button>
-            <button class="btn btn-sm btn-ghost" id="usersNextBtn" disabled>Next →</button>
+            <button class="btn btn-sm btn-ghost" id="usersPrevBtn" disabled>&larr; Prev</button>
+            <button class="btn btn-sm btn-ghost" id="usersNextBtn" disabled>Next &rarr;</button>
           </div>
         </div>
       </section>
@@ -126,7 +120,7 @@
           <button type="submit" class="btn btn-primary">Update Profile</button>
         </form>
 
-        <div class="divider"></div>
+        <hr class="divider">
 
         <div class="section-title">Change Password</div>
         <div class="alert" id="adminPasswordAlert"></div>
@@ -169,7 +163,7 @@
         <div class="section-desc">Remove inactive accounts that haven't signed in for 90+ days. This action cannot be undone.</div>
         <div class="alert" id="cleanupAlert"></div>
         <div class="cleanup-stat">
-          <div class="stat-number" id="statInactiveCount">—</div>
+          <div class="stat-number reg-num" id="statInactiveCount">—</div>
           <div class="stat-info">Inactive accounts found</div>
         </div>
         <button class="btn btn-danger" id="cleanupBtn">Delete All Inactive Accounts</button>
@@ -177,6 +171,7 @@
     </main>
   </div>
 
+  <script src="/js/theme.js"></script>
   <script src="/js/admin.js"></script>
 </body>
 </html>

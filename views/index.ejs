@@ -1,47 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <meta name="description" content="Dot — a clean, minimal link-in-bio page for your links and portfolio.">
-  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
-  <link rel="shortcut icon" href="/images/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css">
+  <%- include('partials/head', { title: title, description: 'Dot — a clean, minimal link-in-bio page for your links and portfolio.' }) %>
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="brand">
-      <img src="/images/logo.svg" alt="Dot">
-      Dot
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="/" class="brand" aria-label="Dot home">
+        <img src="/images/logo.svg" alt="">
+        dot
+      </a>
+      <div class="nav-actions">
+        <a href="/dashboard" id="navDashboardLink" class="btn btn-ghost hidden">Dashboard</a>
+        <button class="btn" data-open-login>Log in</button>
+        <button class="btn btn-primary" data-open-register>Sign up</button>
+      </div>
     </div>
-    <div class="nav-actions">
-      <a href="/dashboard" id="navDashboardLink" class="btn btn-ghost hidden">Dashboard</a>
-      <button class="btn" data-open-login>Log in</button>
-      <button class="btn btn-primary" data-open-register>Sign up</button>
-    </div>
-  </nav>
+  </header>
 
   <section class="hero">
-    <div class="hero-grid">
-      <div class="hero-text">
-        <div class="dot-mark"><span></span></div>
-        <h1>One link.<br>Everything you are.</h1>
-        <p>Your links, your work, your world — all in one place that actually looks good. No clutter, no fuss, just you.</p>
+    <div class="wrap hero-grid">
+      <div class="hero-text" data-reveal>
+        <div class="kicker">Link-in-bio · 001</div>
+        <h1>Everything you are.<br><span class="accent-word">One page.</span></h1>
+        <p class="lede">Links, portfolio, socials — assembled on a single page that actually looks good. Swiss-built: sharp, quiet, no clutter. Just you.</p>
         <div class="hero-actions">
-          <button class="btn btn-primary" data-open-register>Claim your Dot </button>
+          <button class="btn btn-primary" data-open-register>Claim your Dot</button>
           <button class="btn" data-open-login>I already have one</button>
         </div>
       </div>
-      <div class="hero-preview">
+      <div class="hero-preview" data-reveal>
         <div class="phone-frame">
-          <div class="phone-notch"></div>
           <div class="phone-screen">
             <div class="phone-profile">
               <div class="phone-avatar">A</div>
               <div class="phone-name">@yourname</div>
-              <div class="phone-bio">builder of things. coffee addict.</div>
+              <div class="phone-bio">builder of things · coffee addict</div>
             </div>
             <div class="phone-links">
               <div class="phone-link">🔗 My latest project</div>
@@ -59,32 +54,61 @@
     </div>
   </section>
 
-  <div class="features">
-    <div class="feature">
-      <div class="num">01</div>
-      <h3>All your links, one place</h3>
-      <p>Add as many as you want. Reorder them with a drag. Toggle them on and off whenever.</p>
-    </div>
-    <div class="feature">
-      <div class="num">02</div>
-      <h3>Show off your work</h3>
-      <p>Drop up to 6 images with captions. Perfect for your portfolio, projects, or just cool stuff you made.</p>
-    </div>
-    <div class="feature">
-      <div class="num">03</div>
-      <h3>Looks good without trying</h3>
-      <p>Sign up, drop your links, done.</p>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">One link</span>
+      <span class="marquee-item">Portfolio grid</span>
+      <span class="marquee-item">Six themes</span>
+      <span class="marquee-item">No clutter</span>
+      <span class="marquee-item">One link</span>
+      <span class="marquee-item">Portfolio grid</span>
+      <span class="marquee-item">Six themes</span>
+      <span class="marquee-item">No clutter</span>
     </div>
   </div>
 
-  <footer style="text-align:center; padding: 40px 20px 60px; font-size: 12px; color: var(--light-gray); letter-spacing: 0.05em;">
-    <a href="https://maou.name.ng" target="_blank" rel="noopener" style="color: var(--medium-gray); font-weight: 600;">ᗰᗩOᑌ</a>
+  <section class="section">
+    <div class="wrap feature-grid" data-reveal>
+      <div class="feature">
+        <span class="index-num">01</span>
+        <h3>All your links, one place</h3>
+        <p>Add as many as you want. Reorder them with a drag. Toggle them on and off whenever.</p>
+      </div>
+      <div class="feature">
+        <span class="index-num">02</span>
+        <h3>Show off your work</h3>
+        <p>Drop up to six images with captions. Perfect for your portfolio, projects, or just cool stuff you made.</p>
+      </div>
+      <div class="feature">
+        <span class="index-num">03</span>
+        <h3>Looks good without trying</h3>
+        <p>Sign up, drop your links, done. Six themes, one design system, zero fuss.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="brand">
+        <img src="/images/logo.svg" alt="">
+        dot
+        <span class="meta">· link-in-bio · est. 2026</span>
+      </div>
+      <div class="footer-links">
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/cookies">Cookies</a>
+        <a href="https://maou.name.ng" target="_blank" rel="noopener">MAOU</a>
+      </div>
+    </div>
   </footer>
 
   <!-- Login Modal -->
   <div class="modal-overlay" id="loginModal">
     <div class="modal">
-      <button class="modal-close" data-close-modal>&times;</button>
+      <span class="modal-index">MOD.01</span>
+      <button class="modal-close" data-close-modal>Close</button>
+      <div class="micro-label">Member access</div>
       <h2>Log in</h2>
       <div class="alert" id="loginAlert"></div>
       <form id="loginForm">
@@ -105,7 +129,9 @@
   <!-- Register Modal -->
   <div class="modal-overlay" id="registerModal">
     <div class="modal">
-      <button class="modal-close" data-close-modal>&times;</button>
+      <span class="modal-index">MOD.02</span>
+      <button class="modal-close" data-close-modal>Close</button>
+      <div class="micro-label">New account</div>
       <h2>Create your Dot</h2>
       <div class="alert" id="registerAlert"></div>
       <form id="registerForm">
@@ -128,6 +154,11 @@
     </div>
   </div>
 
+  <%- include('partials/consent') %>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/reveal.js"></script>
   <script src="/js/script.js"></script>
+  <script src="/js/consent.js"></script>
 </body>
 </html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title: title, description: 'Privacy policy for Dot.' }) %>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="/" class="brand" aria-label="Dot home">
+        <img src="/images/logo.svg" alt="">
+        dot
+      </a>
+      <div class="nav-actions">
+        <a href="/" class="btn btn-sm btn-ghost">&larr; Back to site</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="legal-page" data-reveal>
+    <div class="doc-meta">Dot · Privacy Policy · v1.0 · 2026</div>
+    <h1>Privacy Policy</h1>
+
+    <h2>1. What we collect</h2>
+    <p>The minimum needed to run your page:</p>
+    <ul>
+      <li>Your username, email, and a securely hashed password</li>
+      <li>Profile information you choose to add — display name, bio, location, avatar</li>
+      <li>The links and portfolio items you post</li>
+      <li>Anonymous technical data for basic operations</li>
+    </ul>
+
+    <h2>2. What we don't collect</h2>
+    <ul>
+      <li>No analytics trackers, no advertising cookies, no third-party pixel</li>
+      <li>No scanning of the content of your links</li>
+    </ul>
+
+    <h2>3. How data is used</h2>
+    <p>Your data is used only to operate the service — signing you in, rendering your public page, and keeping the platform running.</p>
+
+    <h2>4. Passwords &amp; security</h2>
+    <p>Passwords are hashed and never stored in plain text. Authentication uses signed session tokens.</p>
+
+    <h2>5. Third parties</h2>
+    <p>If you upload an avatar or portfolio image, the file is processed by Cloudinary (our image host) under their privacy policy. We do not sell your data to anyone.</p>
+
+    <h2>6. Your rights</h2>
+    <p>You can contact us to request access to, correction of, or deletion of your account data. Deleting your public pages is available through account management.</p>
+  </div>
+
+  <%- include('partials/consent') %>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/reveal.js"></script>
+  <script src="/js/consent.js"></script>
+</body>
+</html>

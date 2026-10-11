@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { title: title, description: 'How Dot uses cookies.' }) %>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="/" class="brand" aria-label="Dot home">
+        <img src="/images/logo.svg" alt="">
+        dot
+      </a>
+      <div class="nav-actions">
+        <a href="/" class="btn btn-sm btn-ghost">&larr; Back to site</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="legal-page" data-reveal>
+    <div class="doc-meta">Dot · Cookie Policy · v1.0 · 2026</div>
+    <h1>Cookie Policy</h1>
+
+    <h2>1. What Dot uses</h2>
+    <p>We keep the cookie and storage footprint as small as possible:</p>
+    <ul>
+      <li><strong>Session token</strong> — an essential HTTP cookie that keeps you signed in across pages. Required for the dashboard to work.</li>
+      <li><strong>dot_theme</strong> — stored in your browser (localStorage) to remember which of the six themes you picked. No server involved.</li>
+      <li><strong>dot_cookie_consent</strong> — stored in your browser to remember that you accepted this notice.</li>
+    </ul>
+
+    <h2>2. What we don't use</h2>
+    <ul>
+      <li>No advertising or marketing cookies</li>
+      <li>No analytics or tracking cookies</li>
+      <li>No cross-site fingerprinting</li>
+    </ul>
+
+    <h2>3. Managing storage</h2>
+    <p>You can clear your theme and consent preferences at any time from your browser settings. Clearing site data will sign you out on the next request that verifies your session.</p>
+
+    <h2>4. Consent</h2>
+    <p>Essential cookies are required for the service and cannot be disabled without breaking sign-in. Choosing "Accept" simply acknowledges this notice.</p>
+  </div>
+
+  <%- include('partials/consent') %>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/reveal.js"></script>
+  <script src="/js/consent.js"></script>
+</body>
+</html>
